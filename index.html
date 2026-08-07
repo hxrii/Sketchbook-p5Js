@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SKETCHBOOK — p5.js Experiments</title>
+<meta name="description" content="A collection of generative and interactive p5.js sketches.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+<style>
+
+  /* THEMES TO TRY OUT */
+
+  /* First Theme */
+  /* 
+  :root{
+    --cream: #F4EFE3;
+    --ink: #16130F;
+    --yellow: #FFD400;
+    --cyan: #3FCFCF;
+    --orange: #FF5A1F;
+    --border: 3px;
+    --shadow-off: 7px;
+  } 
+  */
+
+
+  /* Riso Print */
+  /* :root{
+  --cream: #EFE9DD;
+  --ink: #1F1B16;
+  --yellow: #F2B705;
+  --cyan: #3282B8;
+  --orange: #D7263D;
+  --border: 3px;
+  --shadow-off: 7px;
+  } */
+
+  /* Terminal Plum */
+
+  /* :root{
+  --cream: #2B1F33;  
+  --ink: #F5EFE6;     
+  --yellow: #A6FF4D;
+  --cyan: #FF3EA5;
+  --orange: #FFB238;
+  --border: 3px;
+  --shadow-off: 7px;
+  } */
+
+  /* Citrus Arcade */
+
+  /* :root{
+  --cream: #FFF6E9;
+  --ink: #16130F;
+  --yellow: #FFC700;
+  --cyan: #00C2A8;
+  --orange: #FF4B3E;
+  --border: 3px;
+  --shadow-off: 7px;
+} */
+
+/* Swiss Blueprint */
+/* :root{
+  --cream: #EDEEF0;
+  --ink: #0B1F3A;
+  --yellow: #FFB000;
+  --cyan: #4A90D9;
+  --orange: #E4572E;
+  --border: 3px;
+  --shadow-off: 7px;
+} */
+
+/* Newsprint
+:root{
+  --cream: #F2F0EA;
+  --ink: #111111;
+  --yellow: #C9C4B5;
+  --cyan: #8A8578;
+  --orange: #D62828;
+  --border: 3px;
+  --shadow-off: 7px;
+} */
+
+/* worskshop */
+/* :root{
+  --cream: #F1E7D0;
+  --ink: #2B2118;
+  --yellow: #D4A017;
+  --cyan: #4C7A6B;
+  --orange: #B5502F;
+  --border: 3px;
+  --shadow-off: 7px;
+} */
+
+
+
+
+/* vapourwave */
+/* :root{
+  --cream: #F6EEF9;
+  --ink: #241E38;
+  --yellow: #FFD8E4;
+  --cyan: #7FE7DC;
+  --orange: #FF8FAB;
+  --border: 3px;
+  --shadow-off: 7px;
+} */
+
+/* Above are light themes*/
+/* chnage panel with ink in .canvas-frame->background before switching to light themes above */
+
+:root{
+  --cream: #296275;
+  --ink: #C9F2C7;
+  --panel: #000000;
+  --yellow: #1b534f;
+  --cyan: #3FE0D0;
+  --orange: #2f793c;
+  --border: 3px;
+  --shadow-off: 7px;
+  --open: #81FBB8;
+  --minimise:#FCCF31;
+  --close: #F55555;
+
+}
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+
+  html{ scroll-behavior:smooth; }
+
+  /* body{
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'Space Grotesk', sans-serif;
+    background-image:
+      linear-gradient(var(--ink) 1px, transparent 1px),
+      linear-gradient(90deg, var(--ink) 1px, transparent 1px);
+    background-size: 40px 40px;
+    background-position: -1px -1px;
+    background-attachment: fixed;
+    background-blend-mode: multiply;
+    background-color: var(--cream);
+  } */
+
+  body{
+  background: var(--cream);
+  color: var(--ink);
+  font-family: 'Space Grotesk', sans-serif;
+  background-image:
+    linear-gradient(color-mix(in srgb, var(--ink) 6%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--ink) 6%, transparent) 1px, transparent 1px);
+  background-size: 40px 40px;
+  background-position: -1px -1px;
+  background-attachment: fixed;
+  background-color: var(--cream);
+}
+  /* body{
+    background-image:
+      linear-gradient(rgba(22,19,15,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(22,19,15,0.06) 1px, transparent 1px);
+  } */
+
+  .mono{ font-family: 'Space Mono', monospace; }
+
+  a{ color: inherit; }
+
+  ::selection{ background: var(--yellow); color: var(--ink); }
+
+  /* ---------- Layout shell ---------- */
+  .wrap{
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ---------- Header ---------- */
+  header{
+    border-bottom: var(--border) solid var(--ink);
+    background: var(--cream);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+  .header-inner{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding: 18px 24px;
+  }
+  .brand{
+    font-weight:700;
+    font-size: 1.3rem;
+    letter-spacing: -0.02em;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    text-decoration:none;
+  }
+  .brand-dot{
+    width: 14px; height:14px;
+    background: var(--orange);
+    border: 2px solid var(--ink);
+    border-radius: 50%;
+    display:inline-block;
+  }
+  nav.mono{
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  nav a{
+    text-decoration:none;
+    margin-left: 18px;
+    border-bottom: 2px solid transparent;
+    padding-bottom: 2px;
+  }
+  nav a:hover{ border-color: var(--ink); }
+
+  /* ---------- Hero ---------- */
+  /* .hero{
+    padding: 72px 0 56px;
+    border-bottom: var(--border) solid var(--ink);
+    position: relative;
+    overflow:hidden;
+  } */
+
+  .hero{
+  padding: 40px 0 36px;
+  border-bottom: var(--border) solid var(--ink);
+  position: relative;
+  overflow:hidden;
+  }
+  
+  .hero-grid{
+    display:grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 32px;
+    align-items:center;
+  }
+  .eyebrow{
+    display:inline-block;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: var(--yellow);
+    border: 2px solid var(--ink);
+    padding: 4px 10px;
+    margin-bottom: 18px;
+    box-shadow: 3px 3px 0 var(--ink);
+  }
+  h1 {
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  font-weight: 700;
+}
+  h1 span{
+    background: var(--ink);
+    color: var(--cream);
+    padding: 0 8px;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+  }
+  .hero p.lede{
+    margin-top: 20px;
+    font-size: 1.05rem;
+    max-width: 46ch;
+    line-height: 1.55;
+  }
+  .hero-meta{
+    margin-top: 26px;
+    display:flex;
+    gap: 14px;
+    flex-wrap:wrap;
+    font-size: 0.78rem;
+  }
+  .pill{
+    border: 2px solid var(--ink);
+    padding: 6px 12px;
+    background: var(--cream);
+  }
+
+  .canvas-frame{
+    border: var(--border) solid var(--ink);
+    box-shadow: var(--shadow-off) var(--shadow-off) 0 var(--ink);
+    background: var(--panel);
+    aspect-ratio: 1 / 1;
+    
+    position:relative;
+  }
+  .canvas-titlebar{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    padding: 8px 10px;
+    background: var(--cream);
+    border-bottom: var(--border) solid var(--ink);
+    font-size: 0.7rem;
+  }
+  .canvas-titlebar .dot{
+    width:9px; height:9px; border-radius:50%;
+    border: 1.5px solid var(--ink);
+  }
+  .canvas-titlebar span.fname{ margin-left:auto; opacity:0.7; }
+  #heroCanvas{ display:block; width:100%; height:calc(100% - 32px); }
+
+  /* ---------- Section headers ---------- */
+  .section-head{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    padding: 48px 0 24px;
+    flex-wrap:wrap;
+    gap: 10px;
+  }
+  .section-head h2{
+    font-size: 1.8rem;
+    letter-spacing: -0.02em;
+  }
+  .section-head .count{
+    font-size: 0.8rem;
+  }
+
+  /* ---------- Sketch grid ---------- */
+  /* .grid{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    padding-bottom: 72px;
+  }
+  @media (max-width: 900px){
+    .grid{ grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 640px){
+    .grid{ grid-template-columns: 1fr; }
+    .hero-grid{ grid-template-columns: 1fr; }
+  } */
+
+  .grid{
+    display:grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+    padding-bottom: 72px;
+  }
+  @media (max-width: 640px){
+    .grid{ grid-template-columns: 1fr; }
+    .hero-grid{ grid-template-columns: 1fr; }
+  }
+
+  .card{
+    background: var(--cream);
+    border: var(--border) solid var(--ink);
+    box-shadow: var(--shadow-off) var(--shadow-off) 0 var(--ink);
+    display:flex;
+    flex-direction:column;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    text-decoration:none;
+    color: var(--ink);
+  }
+  .card:hover{
+    transform: translate(-4px, -4px);
+    box-shadow: calc(var(--shadow-off) + 4px) calc(var(--shadow-off) + 4px) 0 var(--ink);
+  }
+  .card:focus-visible{
+    outline: 3px solid var(--ink);
+    outline-offset: 3px;
+  }
+  .card-titlebar{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    padding: 8px 10px;
+    border-bottom: var(--border) solid var(--ink);
+    font-size: 0.68rem;
+  }
+  .card-titlebar .dot{
+    width:9px; height:9px; border-radius:50%;
+    border: 1.5px solid var(--ink);
+  }
+  .card-titlebar .fname{ margin-left:auto; opacity:0.65; }
+
+  .card-thumb{
+    aspect-ratio: 4/3;
+    border-bottom: var(--border) solid var(--ink);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+    position:relative;
+    background: repeating-linear-gradient(135deg, rgba(22,19,15,0.05) 0 10px, transparent 10px 20px);
+  }
+  .card-thumb img{
+    width:100%; height:100%; object-fit:cover; display:block;
+  }
+  .card-thumb .placeholder{
+    font-size: 0.7rem;
+    text-align:center;
+    padding: 10px;
+    opacity: 0.5;
+  }
+  .card-thumb iframe{
+    width:100%; height:100%; display:block;
+    border:none;
+    
+  }
+
+  .card-body{
+    padding: 16px 18px 18px;
+    flex:1;
+    display:flex;
+    flex-direction:column;
+  }
+  .card-body h3{
+    font-size: 1.15rem;
+    letter-spacing: -0.01em;
+    margin-bottom: 8px;
+  }
+  .card-body p{
+    font-size: 0.88rem;
+    line-height: 1.5;
+    opacity: 0.85;
+    flex:1;
+  }
+  .card-foot{
+    margin-top: 14px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    font-size: 0.72rem;
+  }
+  .tag{
+    border: 1.5px solid var(--ink);
+    padding: 3px 8px;
+  }
+  .open-link{
+    font-weight:700;
+    text-transform:uppercase;
+  }
+  .card:nth-child(3n+1) .card-thumb{ background-color: color-mix(in srgb, var(--open) 18%, transparent); }
+  .card:nth-child(3n+2) .card-thumb{ background-color: color-mix(in srgb, var(--minimise) 18%, transparent); }
+  .card:nth-child(3n+3) .card-thumb{ background-color: color-mix(in srgb, var(--close) 18%, transparent); }
+
+  /* ---------- Footer ---------- */
+  footer{
+    border-top: var(--border) solid var(--ink);
+    padding: 32px 0 40px;
+    font-size: 0.8rem;
+  }
+  .footer-inner{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap: 12px;
+  }
+  footer a{ text-decoration: underline; text-underline-offset: 3px; }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+  }
+
+
+  .about-columns {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  .about-columns > p {
+    margin: 0; /* That's it. */
+  }
+
+  @media (max-width: 900px) {
+    .about-columns {
+      grid-template-columns: 1fr;
+    }
+  }
+
+
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap header-inner">
+    <a href="#top" class="brand"><span class="brand-dot"></span>SKETCHBOOK</a>
+    <nav class="mono">
+      <a href="#sketches">Sketches</a>
+      <a href="#about">About</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow mono">// Welcome to</span>
+        <h1>My growing collection of experiments<br>with <span>p5.js</span></h1>
+        <p class="lede">Welcome to my little corner of creative coding.
+Every sketch on this page is built with p5.js and designed to be explored, not just viewed.
+Some react to your mouse, others evolve on their own, and a few might surprise you.</p>
+        <div class="hero-meta mono">
+          <span class="pill"><span id="sketchCount2"></span> SKETCHES</span>
+          
+          <span class="pill">LAST UPDATED <span id="last-updated"></span></span>
+        </div>
+      </div>
+      <div class="canvas-frame">
+        <div class="canvas-titlebar mono">
+          <span class="dot" style="background:var(--orange)"></span>
+          <span class="dot" style="background:var(--yellow)"></span>
+          <span class="dot" style="background:var(--cyan)"></span>
+          <span class="fname">live.js</span>
+        </div>
+        <canvas id="heroCanvas"></canvas>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap" id="sketches">
+    <div class="section-head">
+      <h2>All sketches</h2>
+      <span class="count mono" id="sketchCount">// 00 pieces</span>
+    </div>
+    <div class="grid" id="sketchGrid"></div>
+  </section>
+
+  <section class="wrap" id="about" style="padding-bottom:64px;">
+    <div class="section-head" style="padding-top:0;">
+      <h2>About this page</h2>
+    </div>
+    <div class="about-columns">
+      <p>
+        This page is my playground for experiments with simulations, particles,
+        algorithms, and interactive sketches. Every project teaches me something
+        new, and I'll keep adding more as I continue exploring the creative side
+        of programming.
+      </p>
+      <p>
+        My biggest inspiration comes from
+        <a href="https://tisch.nyu.edu/about/directory/itp/1984778605" target="_blank" rel="noopener noreferrer">Daniel Shiffman</a>,
+        <a href="https://thecodingtrain.com/" target="_blank" rel="noopener noreferrer">The Coding Train</a>,
+        and
+        <a href="https://natureofcode.com/" target="_blank" rel="noopener noreferrer">The Nature of Code</a>.
+        Their passion for teaching has completely changed the way I look at
+        programming—not just as a tool to solve problems, but as a medium for
+        creativity, play, and exploration.
+      </p>
+
+      <p>
+        Thanks to the amazing work of
+        <a href="https://processing.org/" target="_blank" rel="noopener noreferrer">Processing.org</a>,
+        <a href="https://p5js.org/" target="_blank" rel="noopener noreferrer">p5.js</a>
+        makes it incredibly easy to turn ideas into interactive visuals. It lowers the barrier to creative coding, making programming
+        feel more like sketching on a digital canvas than writing software.
+      </p>
+    </div>  
+  </section>
+</main>
+
+<footer>
+  <div class="wrap footer-inner mono">
+    <span>&copy; 2026 · Built with p5.js &amp; 🤍</span>
+    <a href="https://github.com/hxrii/p5Js-ShowCase" target="_blank" rel="noopener">GitHub →</a>
+  </div>
+</footer>
+<script src="./sketches.js"></script>
+<script>
+
+
+const grid = document.getElementById('sketchGrid');
+const countEl = document.getElementById('sketchCount');
+countEl.textContent = `// ${String(SKETCHES.length).padStart(2,'0')} pieces`;
+document.getElementById("sketchCount2").textContent = `${String(SKETCHES.length).padStart(2,'0')}`;
+
+SKETCHES.forEach((s) => {
+  const card = document.createElement('a');
+  card.className = 'card';
+  card.href = s.link;
+  card.target = '_blank';
+  card.rel = 'noopener';
+
+  card.innerHTML = `
+    <div class="card-titlebar mono">
+      <span class="dot" style="background:var(--open)"></span>
+      <span class="dot" style="background:var(--minimise)"></span>
+      <span class="dot" style="background:var(--close)"></span>
+      <span class="fname">${s.file}</span>
+    </div>
+    <div class="card-thumb">
+      ${s.embed
+        ? `<iframe src="${s.embed}" loading="lazy" title="${s.title} live preview" tabindex="-1"></iframe>`
+        : s.thumb
+          ? `<img src="${s.thumb}" alt="${s.title} preview">`
+          : `<div class="placeholder mono">// preview<br>${s.dims}</div>`}
+    </div>
+    <div class="card-body">
+      <h3>${s.title}</h3>
+      <p>${s.description}</p>
+      <div class="card-foot mono">
+        <span class="tag">${s.tag}</span>
+        <span class="open-link">Open ↗</span>
+      </div>
+    </div>
+  `;
+  grid.appendChild(card);
+});
+
+
+const canvas = document.getElementById('heroCanvas');
+const ctx = canvas.getContext('2d');
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function resizeCanvas(){
+  const rect = canvas.getBoundingClientRect();
+  canvas.width = rect.width * devicePixelRatio;
+  canvas.height = rect.height * devicePixelRatio;
+  ctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
+}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+const N = 40;
+const pts = Array.from({length: N}, () => ({
+  x: Math.random(),
+  y: Math.random(),
+  a: Math.random() * Math.PI * 2,
+  speed: 0.85 + Math.random() * 0.3
+}));
+const colors = ['#FFD400', '#3FCFCF', '#FF5A1F'];
+
+function draw(t){
+  const rect = canvas.getBoundingClientRect();
+  const w = rect.width, h = rect.height;
+  ctx.clearRect(0, 0, w, h);
+  ctx.fillStyle = '#16130F';
+  ctx.fillRect(0, 0, w, h);
+
+  pts.forEach((p, i) => {
+    const angle = p.a + t * 0.00012 * p.speed;
+    const cx = (p.x + Math.cos(angle) * 0.06) * w;
+    const cy = (p.y + Math.sin(angle * 1.3) * 0.06) * h;
+    ctx.beginPath();
+    ctx.arc(cx, cy, 3.2, 0, Math.PI * 2);
+    ctx.fillStyle = colors[i % colors.length];
+    ctx.fill();
+  });
+
+  if (!reduceMotion) requestAnimationFrame(draw);
+}
+requestAnimationFrame(draw);
+if (reduceMotion) draw(0);
+</script>
+
+</body>
+</html>
