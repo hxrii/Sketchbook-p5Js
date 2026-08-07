@@ -2,7 +2,7 @@
 
 A minimal, static gallery for showcasing p5.js sketches — live, running previews included, not just screenshots. Built with plain HTML, CSS, and JS. No frameworks, no build step, no dependencies to install. Just edit an array and push.
 
-**[→ View Live Site](#)** hxrii.github.io/Sketchbook-p5Js/
+**[→ View Live Site](hxrii.github.io/Sketchbook-p5Js/)** 
 
 ---
 
