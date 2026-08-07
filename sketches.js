@@ -3,7 +3,16 @@ document.getElementById("last-updated").textContent = lastUpdated;
 
 
 const SKETCHES = [
-  
+  {
+  title: "Bubble Interact",
+  file: "bubble-world.js",
+  description: "Personal space? Never heard of it. One bubble is minding its own business, the other won't stop following your mouse. Touch them together and watch the drama unfold.",
+  link: "https://editor.p5js.org/hxrii/full/xcN6TQ-gZ",
+  tag: "DESKTOP INTERACTIVE",
+  dims: "600×600",
+  embed: "https://editor.p5js.org/hxrii/embed/xcN6TQ-gZ",
+  thumb: ""
+  },
   {
   title: "Bubble World",
   file: "bubble-world.js",
