@@ -1,4 +1,4 @@
-# 🎨 Sketchbook — p5.js Showcase
+# Sketchbook — p5.js Showcase
 
 A minimal, static gallery for showcasing p5.js sketches — live, running previews included, not just screenshots. Built with plain HTML, CSS, and JS. No frameworks, no build step, no dependencies to install. Just edit an array and push.
 
