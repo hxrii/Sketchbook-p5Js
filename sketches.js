@@ -3,7 +3,16 @@ document.getElementById("last-updated").textContent = lastUpdated;
 
 
 const SKETCHES = [
-
+  {
+  title: "Walker",
+  file: "Walker.js",
+  description: "Change the walker's probability of choosing directions",
+  link: "https://editor.p5js.org/hxrii/full/pDI1KdGcD",
+  tag: "DESKTOP INTERACTIVE",
+  dims: "600×600",
+  embed: "https://editor.p5js.org/hxrii/embed/pDI1KdGcD",
+  thumb: ""
+  },
   {
   title: "Perceptron",
   file: "Perceptron.js",
