@@ -1,4 +1,4 @@
-const lastUpdated = "AUG 7, 2026";
+const lastUpdated = "AUG 17, 2026";
 document.getElementById("last-updated").textContent = lastUpdated;
 
 
