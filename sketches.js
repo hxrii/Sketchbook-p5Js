@@ -3,6 +3,17 @@ document.getElementById("last-updated").textContent = lastUpdated;
 
 
 const SKETCHES = [
+
+  {
+  title: "Perceptron",
+  file: "Perceptron.js",
+  description: "A tiny brain trying to figure out which side of the line a dot belongs to. Click to Restart",
+  link: "https://editor.p5js.org/hxrii/full/k3XZdTm_4",
+  tag: "DESKTOP INTERACTIVE",
+  dims: "600×600",
+  embed: "https://editor.p5js.org/hxrii/embed/k3XZdTm_4",
+  thumb: ""
+  },  
   {
   title: "Bubble Interact",
   file: "bubble-world.js",
