@@ -3,7 +3,16 @@ document.getElementById("last-updated").textContent = lastUpdated;
 
 
 const SKETCHES = [
-   
+  {
+  title: "Paint Splatter",
+  file: "PaintSplatter.js",
+  description: "Gaussian Random Distribution Paint splatter with adjustable mean and standard deviations",
+  link: "https://editor.p5js.org/hxrii/full/_1KvmZVOF",
+  tag: "DESKTOP INTERACTIVE",
+  dims: "600×600",
+  embed: "https://editor.p5js.org/hxrii/embed/_1KvmZVOF",
+  thumb: ""
+  }, 
   {
   title: "Gaussian Distribution",
   file: "GaussianDistribution.js",
