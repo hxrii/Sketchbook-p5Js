@@ -1,8 +1,18 @@
-const lastUpdated = "AUG 17, 2026";
+const lastUpdated = "AUG 18, 2026";
 document.getElementById("last-updated").textContent = lastUpdated;
 
 
 const SKETCHES = [
+  {
+  title: "Mouse Walker",
+  file: "MouseWalker.js",
+  description: "Change the walker's probability of mouseHover",
+  link: "https://editor.p5js.org/hxrii/full/nchE3WRxg",
+  tag: "DESKTOP INTERACTIVE",
+  dims: "600×600",
+  embed: "https://editor.p5js.org/hxrii/embed/nchE3WRxg",
+  thumb: ""
+  },
   {
   title: "Walker",
   file: "Walker.js",
