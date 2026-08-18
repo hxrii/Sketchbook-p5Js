@@ -6,7 +6,7 @@ const SKETCHES = [
   {
   title: "Mouse Walker",
   file: "MouseWalker.js",
-  description: "Change the walker's probability of mouseHover",
+  description: "Change the walker's direction probability using mouse hover",
   link: "https://editor.p5js.org/hxrii/full/nchE3WRxg",
   tag: "DESKTOP INTERACTIVE",
   dims: "600×600",
