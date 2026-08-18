@@ -3,6 +3,17 @@ document.getElementById("last-updated").textContent = lastUpdated;
 
 
 const SKETCHES = [
+   
+  {
+  title: "Gaussian Distribution",
+  file: "GaussianDistribution.js",
+  description: "Gaussian Random Distribution with increasing standard deviation",
+  link: "https://editor.p5js.org/hxrii/full/IFHwuNkHP",
+  tag: "DESKTOP INTERACTIVE",
+  dims: "600×600",
+  embed: "https://editor.p5js.org/hxrii/embed/IFHwuNkHP",
+  thumb: ""
+  }, 
   {
   title: "Mouse Walker",
   file: "MouseWalker.js",
