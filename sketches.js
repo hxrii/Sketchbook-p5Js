@@ -3,7 +3,6 @@ document.getElementById("last-updated").textContent = lastUpdated;
 
 
 const SKETCHES = [
-    <iframe src="https://editor.p5js.org/hxrii/full/6zfsPF18k"></iframe>
   {
   title: "Accept-Reject distribution",
   file: "acceptReject.js",
