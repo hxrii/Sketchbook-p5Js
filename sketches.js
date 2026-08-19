@@ -3,7 +3,16 @@ document.getElementById("last-updated").textContent = lastUpdated;
 
 
 const SKETCHES = [
-
+  {
+  title: "Perlin Noise Walker",
+  file: "perlinNoiseWalker.js",
+  description: "Walker moves the next step based on Perlin Noise for smooth transition. Click to Reload",
+  link: "https://editor.p5js.org/hxrii/full/M0gsCTYPF",
+  tag: "DESKTOP INTERACTIVE",
+  dims: "600×600",
+  embed: "https://editor.p5js.org/hxrii/embed/M0gsCTYPF",
+  thumb: ""
+  },  
   {
   title: "Accept-Reject distribution",
   file: "acceptReject.js",
