@@ -3,6 +3,17 @@ document.getElementById("last-updated").textContent = lastUpdated;
 
 
 const SKETCHES = [
+    <iframe src="https://editor.p5js.org/hxrii/full/6zfsPF18k"></iframe>
+  {
+  title: "Accept-Reject distribution",
+  file: "acceptReject.js",
+  description: "Accept Reject Algorithm (Probability of choosing the index is the index value itself). Click to reload",
+  link: "https://editor.p5js.org/hxrii/full/_1KvmZVOF",
+  tag: "DESKTOP INTERACTIVE",
+  dims: "600×600",
+  embed: "https://editor.p5js.org/hxrii/embed/_1KvmZVOF",
+  thumb: ""
+  },   
   {
   title: "Paint Splatter",
   file: "PaintSplatter.js",
