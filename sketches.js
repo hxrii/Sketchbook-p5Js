@@ -3,14 +3,15 @@ document.getElementById("last-updated").textContent = lastUpdated;
 
 
 const SKETCHES = [
+
   {
   title: "Accept-Reject distribution",
   file: "acceptReject.js",
   description: "Accept Reject Algorithm (Probability of choosing the index is the index value itself). Click to reload",
-  link: "https://editor.p5js.org/hxrii/full/_1KvmZVOF",
+  link: "https://editor.p5js.org/hxrii/full/6zfsPF18k",
   tag: "DESKTOP INTERACTIVE",
   dims: "600×600",
-  embed: "https://editor.p5js.org/hxrii/embed/_1KvmZVOF",
+  embed: "https://editor.p5js.org/hxrii/embed/6zfsPF18k",
   thumb: ""
   },   
   {
