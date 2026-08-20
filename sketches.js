@@ -1,8 +1,19 @@
-const lastUpdated = "AUG 19, 2026";
+const lastUpdated = "AUG 20, 2026";
 document.getElementById("last-updated").textContent = lastUpdated;
 
 
 const SKETCHES = [
+
+  {
+  title: "Perlin Noise Terrain",
+  file: "perlinNoiseTerrain.js",
+  description: "Terrain Generated using Perlin Noise. 2D application of Perlin Noise for continous random Terrain",
+  link: "https://editor.p5js.org/hxrii/full/FzUpNY-Q5",
+  tag: "DESKTOP INTERACTIVE",
+  dims: "600×600",
+  embed: "https://editor.p5js.org/hxrii/embed/FzUpNY-Q5",
+  thumb: ""
+  },   
   {
   title: "Perlin Noise Walker",
   file: "perlinNoiseWalker.js",
